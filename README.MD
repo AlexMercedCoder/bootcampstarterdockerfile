@@ -25,7 +25,7 @@ Create two files `init_userdb.sql` and `DOCKERFILE`
 `init_userdb.sql`
 ```sql
 CREATE USER student WITH SUPERUSER PASSWORD 'student';
-CREATE DATABASE docker;
+CREATE DATABASE student;
 ```
 
 `DOCKERFILE`
