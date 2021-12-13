@@ -48,8 +48,8 @@ RUN sudo apt install postgresql -y
 
 ## Setup Postgres User and Database for docker user
 USER postgres
-COPY init_userdb.sql /var/lib/postgresql/
-RUN service postgresql start && psql -f ~/init_userdb.sql
+COPY init_userdb.sql /home/postgres/
+RUN service postgresql start && psql -f /home/postgres/init_userdb.sql && service postgresql stop
 
 ## SWITCH back to docker user
 USER student
@@ -60,6 +60,7 @@ RUN wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key 
 RUN sudo apt update -y
 RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
 RUN sudo apt-get update && sudo apt-get install -y mongodb-org
+RUN sudo mkdir -p /data/db && sudo chmod 777 /data/db
 
 WORKDIR /home/student/
 
@@ -73,9 +74,8 @@ RUN sudo apt install git -y
 RUN git config --global user.name "Alex Merced"
 RUN git config --global user.email example-email@alexmerced.dev
 
-## Install Ruby
+## Install Ruby (Will install 2.7)
 RUN sudo apt install ruby-full -y
-
 
 ## Install Python3
 RUN sudo apt-get install python3 python3-dev -y
@@ -89,3 +89,11 @@ ENTRYPOINT bash
 Click on the gear in the bottom left corner of VSCode and click open command pallette and lookup remote-container command to open a directory in a container, open the current folder using the dockerfile and then just... wait, it will take a long while for it to build the image but it only needs to build it once.
 
 Once it's done building whenever you open this folder, it'll automatically open the container and mount the folder as if it were inside the container.
+
+You could also run the container and attach an instance of VSCode to the running container, there is a remote-container extension option for that.
+
+## Starting Database Servers
+
+- `sudo service postgresql start` for postgresql
+
+- `mongod` for mongo
