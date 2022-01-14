@@ -1,6 +1,10 @@
 # How to create your Bootcamp Starter Environment
 #### By Alex Merced of AlexMercedCoder.com
 
+## Side-Note:
+
+If ever doing backend work and for some reason even if this tool doesn't do the trick you can use REPLit.com to do work in any language. Just keep in mind when running any dev servers make sure to bind the host to 0.0.0.0. Just look how in the particular frameworks documentation usually as simple as passing a flag with the command that starts the dev server.
+
 ## Pre-requisites
 
 You will need to install Visual Studio Code and Docker for your operating system.
